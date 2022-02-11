@@ -7,6 +7,6 @@ include_directories(.)
 
 add_executable(
         sistemas-operacionais
-        HelloWorld.cpp
+        HelloWorld.c
 )
 

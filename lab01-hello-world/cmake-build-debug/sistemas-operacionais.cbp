@@ -82,10 +82,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/HelloWorld.cpp">
-			<Option target="sistemas-operacionais"/>
-		</Unit>
-		<Unit filename="/Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/HelloWorld.h">
+		<Unit filename="/Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/HelloWorld.c">
 			<Option target="sistemas-operacionais"/>
 		</Unit>
 		<Unit filename="/Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/CMakeLists.txt">

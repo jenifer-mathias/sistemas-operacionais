@@ -129,29 +129,29 @@ sistemas-operacionais/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sistemas-operacionais.dir/build.make CMakeFiles/sistemas-operacionais.dir/build
 .PHONY : sistemas-operacionais/fast
 
-HelloWorld.o: HelloWorld.cpp.o
+HelloWorld.o: HelloWorld.c.o
 .PHONY : HelloWorld.o
 
 # target to build an object file
-HelloWorld.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sistemas-operacionais.dir/build.make CMakeFiles/sistemas-operacionais.dir/HelloWorld.cpp.o
-.PHONY : HelloWorld.cpp.o
+HelloWorld.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sistemas-operacionais.dir/build.make CMakeFiles/sistemas-operacionais.dir/HelloWorld.c.o
+.PHONY : HelloWorld.c.o
 
-HelloWorld.i: HelloWorld.cpp.i
+HelloWorld.i: HelloWorld.c.i
 .PHONY : HelloWorld.i
 
 # target to preprocess a source file
-HelloWorld.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sistemas-operacionais.dir/build.make CMakeFiles/sistemas-operacionais.dir/HelloWorld.cpp.i
-.PHONY : HelloWorld.cpp.i
+HelloWorld.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sistemas-operacionais.dir/build.make CMakeFiles/sistemas-operacionais.dir/HelloWorld.c.i
+.PHONY : HelloWorld.c.i
 
-HelloWorld.s: HelloWorld.cpp.s
+HelloWorld.s: HelloWorld.c.s
 .PHONY : HelloWorld.s
 
 # target to generate assembly for a file
-HelloWorld.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sistemas-operacionais.dir/build.make CMakeFiles/sistemas-operacionais.dir/HelloWorld.cpp.s
-.PHONY : HelloWorld.cpp.s
+HelloWorld.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sistemas-operacionais.dir/build.make CMakeFiles/sistemas-operacionais.dir/HelloWorld.c.s
+.PHONY : HelloWorld.c.s
 
 # Help Target
 help:
