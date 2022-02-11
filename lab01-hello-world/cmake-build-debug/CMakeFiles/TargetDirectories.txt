@@ -1,0 +1,3 @@
+/Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/cmake-build-debug/CMakeFiles/sistemas-operacionais.dir
