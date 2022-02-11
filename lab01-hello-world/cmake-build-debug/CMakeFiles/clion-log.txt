@@ -1,4 +1,13 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /Users/jenifer.santos/sistemas-operacionais/lab01-hello-world
 -- Configuring done
--- Generating done
--- Build files have been written to: /Users/jenifer.santos/sistemas-operacionais/lab01-hello-world/cmake-build-debug
+CMake Error at CMakeLists.txt:8 (add_executable):
+  Cannot find source file:
+
+    HelloWorld.cpp
+
+
+CMake Error at CMakeLists.txt:8 (add_executable):
+  No SOURCES given to target: sistemas-operacionais
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.
