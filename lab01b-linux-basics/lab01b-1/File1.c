@@ -33,7 +33,6 @@ char readFile(char filePath[]) {
 
 int main() {
     printf("\n**** Exibição do conteúdo de um arquivo ****\n");
-
     printf("\n Digite o caminho do arquivo para obter a impressão do texto: ");
     char filePath;
     scanf("%s",&filePath);
