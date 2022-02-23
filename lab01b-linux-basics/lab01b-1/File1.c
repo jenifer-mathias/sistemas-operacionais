@@ -18,12 +18,12 @@ char readFile(char filePath[]) {
     FILE *file;
     char fileContent;
 
-    file = fopen(filePath, FILE_MODE);           // abertura do arquivo
+    file = fopen(filePath, FILE_MODE);                        // abertura do arquivo
     if (file == NULL) {
-        printf("\nArquivo não encontrado!\n");    // caso em que o path passado está incorreto ou não existem arquivos
+        printf("\nArquivo não encontrado!\n");                // path passado está incorreto ou não existem arquivos
         exit(EXIT_FAILURE);
     } else {
-        while((fileContent = fgetc(file)) != EOF) {               // EOF representa o fim do arquivo
+        while((fileContent = fgetc(file)) != EOF) {           // EOF representa o fim do arquivo
             putchar(fileContent);
         }
     }
