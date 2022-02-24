@@ -65,4 +65,6 @@ int main() {                                                                    
     free(inputFilePath);                                                         /** chamada no S.O. free() **/
     free(outputFilePath);                                                        /** chamada no S.O. free() **/
     EXIT_SUCCESS;
+
+    /** total de chamadas do sistema: 12 **/
 }
