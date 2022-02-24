@@ -13,5 +13,5 @@ arquivo 1: (/Users/(your user)/sistemas-operacionais/assets/sample-text.txt
 arquivo 2: (/Users/(your user)/sistemas-operacionais/assets/new-file.txt)
 
 Resultado da execução:
-![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/main/assets/result-lab01b-file1-cli.png)
+![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/main/assets/result-lab01b-file2.png)
 
