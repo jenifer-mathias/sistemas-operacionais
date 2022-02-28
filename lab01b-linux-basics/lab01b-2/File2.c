@@ -26,19 +26,19 @@ Quantas chamadas de sistemas foram realizadas? **/
 void copyFile(FILE *inputFilePath, FILE *outputFilePath) {
     char contentFile;
     while ((contentFile = getc(inputFilePath)) != EOF)         /** chamada no S.O. getc() **/
-        putc (contentFile, outputFilePath);                    /** chamada no S.O. putc() **/
+        putc(contentFile, outputFilePath);                    /** chamada no S.O. putc() **/
 }
 
 char manipulateFile(const char *inputFile, const char *outputFile) {
     FILE *fileOne, *fileTwo;
 
-    fileOne = fopen(inputFile, FILE_READ_MODE);
+    fileOne = fopen(inputFile, FILE_READ_MODE);                /** chamada no S.O. fopen() **/
     if (fileOne == NULL) {
         printf("\nArquivo não encontrado!\n");                 /** chamada no S.O. printf() **/
         exit(EXIT_FAILURE);
     }
 
-    fileTwo = fopen(outputFile, FILE_WRITE_MODE);
+    fileTwo = fopen(outputFile, FILE_WRITE_MODE);              /** chamada no S.O. fopen() **/
 
     copyFile(fileOne, fileTwo);
     printf("\nArquivo copiado com sucesso!");                  /** chamada no S.O. printf() **/
@@ -61,10 +61,10 @@ int main() {                                                                    
     scanf("%s", outputFilePath);                                                 /** chamada no S.O. scanf() **/
 
     manipulateFile(inputFilePath, outputFilePath);
-                                                                                 // libera espaço de memória
+    // libera espaço de memória
     free(inputFilePath);                                                         /** chamada no S.O. free() **/
     free(outputFilePath);                                                        /** chamada no S.O. free() **/
     EXIT_SUCCESS;
 
-    /** total de chamadas do sistema: 12 **/
+    /** total de chamadas do sistema: 16 **/
 }
