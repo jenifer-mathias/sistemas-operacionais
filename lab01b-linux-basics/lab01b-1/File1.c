@@ -17,13 +17,13 @@ Dica de arquivos em C: https://www.ime.usp.br/~pf/algoritmos/aulas/io.html **/
 char readFile(char filePath[]) {
     FILE *file;
     char fileContent;
-                                                              /** chamada no S.O. fopen() **/
+    /** chamada no S.O. fopen() **/
     file = fopen(filePath, FILE_MODE);                        // abertura do arquivo
     if (file == NULL) {                                       /** chamada no S.O. printf() **/
         printf("\nArquivo não encontrado!\n");                // path passado está incorreto ou não existem arquivos
         exit(EXIT_FAILURE);
     } else {
-        while((fileContent = fgetc(file)) != EOF) {           // EOF representa o fim do arquivo
+        while ((fileContent = fgetc(file)) != EOF) {           // EOF representa o fim do arquivo
             putchar(fileContent);                             /** chamada no S.O. putchar() **/
         }
     }
@@ -35,7 +35,7 @@ int main() {
     printf("\n**** Exibição do conteúdo de um arquivo ****\n");                     /** chamada no S.O. printf() **/
     printf("\n Digite o caminho do arquivo para obter a impressão do texto: ");     /** chamada no S.O. printf() **/
     char filePath;
-    scanf("%s",&filePath);                                  /** chamada no S.O. scanf() **/
+    scanf("%s", &filePath);                                  /** chamada no S.O. scanf() **/
     readFile(&filePath);
     EXIT_SUCCESS;
 
