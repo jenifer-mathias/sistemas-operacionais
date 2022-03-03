@@ -8,7 +8,7 @@
 
 .DS_Store
 /c++exercises/.idea/vcs.xml
-CMakeLists.txt
+lab02a-process/lab02a-5-process-chain-creation/CMakeLists.txt
 cmake-build-debug
 /**/.idea/*
 CMakeFiles

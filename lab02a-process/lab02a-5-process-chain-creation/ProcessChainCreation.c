@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -13,7 +12,7 @@ int main (int argc, char *argv[]) {
     }
     n = atoi(argv[1]);
     for (i = 1; i < n; i++) {
-        if (childpid = fork()){
+        if (childpid = fork()) {
             break;
         }
     }
