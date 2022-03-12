@@ -27,23 +27,22 @@ int main() {
 #include <unistd.h>
 #include <sys/wait.h>
 
-int value = 5;
-
 int main() {
+    int value = 5, p[2];
+    pipe(p);
     pid_t pid;
-
     pid = fork();
-
-    value += 15;
 
     if (pid == 0) {                                   /** child process **/
         printf("\nEntrei no filho!\n");
-        printf ("\nCHILD: value = %d\n",value);       /** LINE A **/
+        value += 15;
+        write(p[1], &value, sizeof(value));
+        printf("\nCHILD: value = %d\n", value);       /** LINE A **/
         return 0;
-    }
-    else if (pid > 0) {                               /** parent process **/
+    } else if (pid > 0) {                             /** parent process **/
         wait(NULL);
-        printf ("\nPARENT: value = %d\n",value);      /** LINE A **/
+        read(p[0], &value, sizeof(value));
+        printf("\nPARENT: value = %d\n", value);      /** LINE A **/
         return 0;
     }
 }
