@@ -19,8 +19,6 @@ int main() {
 
 #include <signal.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
 #include <unistd.h>
 
 #define READ 0
@@ -28,7 +26,7 @@ int main() {
 int num;
 
 int main() {
-  printf("Insira um numero: ");
+  printf("Insira um número: ");
   scanf("%i", &num);
 
   int fd[2];
