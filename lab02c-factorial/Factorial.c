@@ -26,7 +26,7 @@ int main() {
 int num;
 
 int main() {
-  printf("Insira um número: ");
+  printf("\nInsira um número: ");
   scanf("%i", &num);
 
   int fd[2];
@@ -44,7 +44,7 @@ int main() {
     read(fd[READ], &n, sizeof(n));
     close(fd[READ]);
     int fatorial = n * n2;
-    printf("Fatorial de %i é %i\n", num, fatorial);
+    printf("\nO fatorial de %i é %i\n", num, fatorial);
     _exit(0);
   }
   if (pid == 0) {
