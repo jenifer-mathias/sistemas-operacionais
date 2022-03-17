@@ -17,8 +17,47 @@ int main() {
 }
  **/
 
+#include <signal.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+#define READ 0
+#define WRITE 1
+int num;
 
 int main() {
+  printf("Insira um numero: ");
+  scanf("%i", &num);
 
+  int fd[2];
+  pid_t pid;
+  pipe(fd);
+  pid = fork();
+
+  if (pid > 0) {
+    int n;
+    int n2 = 1;
+    for (int i = num / 2 + 1; i <= num; i++) {
+      n2 *= i;
+    }
+    close(fd[WRITE]);
+    read(fd[READ], &n, sizeof(n));
+    close(fd[READ]);
+    int fatorial = n * n2;
+    printf("Fatorial de %i é %i\n", num, fatorial);
+    _exit(0);
+  }
+  if (pid == 0) {
+    int n = 1;
+    for (int i = 1; i <= num / 2; i++) {
+      n *= i;
+    }
+
+    close(fd[READ]);
+    write(fd[WRITE], &n, sizeof(n));
+    close(fd[WRITE]);
+    pause();
+  }
 }
