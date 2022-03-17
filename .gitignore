@@ -13,6 +13,7 @@ cmake-build-debug
 /**/.idea/*
 CMakeFiles
 CMakeCache.txt
+CMakeLists.txt
 
 .vscode/
 !.vscode/settings.json
