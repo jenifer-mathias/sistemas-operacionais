@@ -24,3 +24,7 @@ a) Implemente uma possível solução para o problema do jantar dos filósofos;
 b) Explique, em cada trecho do seu programa, como é resolvido o problema da comunicação inter processos (IPC).
 
 
+Para resolver o problema do jantar dos filósofos, criamos uma thread e um semáforo para cada filósofo e um vetor para armazenar o estado de cada filosofo (pensando, com fome ou comendo). Cada filósofo pensa, tenta pegar os garfos, come quando conseguir pegar e solta os garfos depois de comer.  Utilizamos o estado dos filósofos e os semáforos para verificar se o filósofo está comendo, ver quando os garfos então disponíveis (quando os filósofos à esquerda e à direita soltarem os garfos após comer).
+
+![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/feat/projeto-01/assets/projeto.png)
+![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/feat/projeto-01/assets/projeto1.png)
