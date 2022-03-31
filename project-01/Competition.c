@@ -72,21 +72,21 @@ _Noreturn void *gerenciaAcoesFilosofos(void *j) {
 }
 
 void pegaGarfos(int i) {
-    sem_wait(&mutex); /**Pega o semáforo */
-    estado[i] = COM_FOME; /**Seta que está com fome */
-    devolveEstadoFilosofos(); /**Mostra o estado dos filósofos */
-    verificaAcoesFilosofos(i); /**Tenta pegar os garfos */
-    sem_post(&mutex); /**Libera o semáforo */
-    sem_wait(&semaforo[i]); /**Atualiza o seu próprio semáforo */
+    sem_wait(&mutex); /** Pega o semáforo */
+    estado[i] = COM_FOME; /** Seta que está com fome */
+    devolveEstadoFilosofos(); /** Mostra o estado dos filósofos */
+    verificaAcoesFilosofos(i); /** Tenta pegar os garfos */
+    sem_post(&mutex); /** Libera o semáforo */
+    sem_wait(&semaforo[i]); /** Atualiza o seu próprio semáforo */
 }
 
 void soltaGarfos(int i) {
     int esquerda, direita;
-    sem_wait(&mutex); /**Pega o semáforo */
-    estado[i] = PENSANDO; /**Seta que está pensando */
-    devolveEstadoFilosofos(); /**Mostra o estado dos filósofos */
-    esquerda = calculaPosicaoFilosofoEsquerda(i, numeroFilosofos); /**Verifica se o filósofo a esquerda está comendo */
-    direita = calculaPosicaoFilosofoDireita(i, numeroFilosofos); /**Verifica se o filósofo a direita está comendo */
+    sem_wait(&mutex); /** Pega o semáforo */
+    estado[i] = PENSANDO; /** Seta que está pensando */
+    devolveEstadoFilosofos(); /** Mostra o estado dos filósofos */
+    esquerda = calculaPosicaoFilosofoEsquerda(i, numeroFilosofos); /** Verifica se o filósofo a esquerda está comendo */
+    direita = calculaPosicaoFilosofoDireita(i, numeroFilosofos); /** Verifica se o filósofo a direita está comendo */
     verificaAcoesFilosofos(esquerda);
     verificaAcoesFilosofos(direita);
     sem_post(&mutex);
@@ -113,28 +113,28 @@ void comendo() {
 }
 
 void gerenciaThreads(int numeroFilosofos) {
-    // usa alocação dinâmica de memória para criar a quantidade de threads segundo o número de filósofos informados
+    /** usa alocação dinâmica de memória para criar a quantidade de threads segundo o número de filósofos informados */
     thread = (pthread_t *) malloc(numeroFilosofos * sizeof(pthread_t));
 
-    //Inicializa o estado
+    /** Inicializa o estado */
     for (i = 0; i < numeroFilosofos; i++) {
         estado[i] = 0;
     }
     devolveEstadoFilosofos();
     pthread_t thread[1000];
 
-    sem_init(&mutex, 0, 1);    //inicia semáforo mutex
+    sem_init(&mutex, 0, 1);    /** inicia semáforo mutex */
 
     for (i = 0; i < numeroFilosofos; i++) {
-        sem_init(&semaforo[i], 0, 0);        //inicia o semáforo dos filósofos
+        sem_init(&semaforo[i], 0, 0);        /** inicia o semáforo dos filósofos */
     }
 
-    for (i = 0; i < numeroFilosofos; i++) {    //cria as threads para os filósofos
+    for (i = 0; i < numeroFilosofos; i++) {    /** cria as threads para os filósofos */
         pthread_create(&thread[i], NULL, gerenciaAcoesFilosofos, &i);
     }
 
     for (i = 0; i < numeroFilosofos; i++) {
-        pthread_join(thread[i], NULL);      //faz um join - une as threads
+        pthread_join(thread[i], NULL);      /** faz um join - une as threads */
     }
 }
 
