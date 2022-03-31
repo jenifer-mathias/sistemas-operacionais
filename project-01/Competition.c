@@ -48,13 +48,13 @@ int calculaPosicaoFilosofoDireita(int meio, int total) {
 
 void devolveEstadoFilosofos() {
     for (i = 1; i <= numeroFilosofos; i++) {
-        if (estado[i] == PENSANDO) {
+        if (estado[i] == PENSANDO) { /** Mostra se o filósofo está pensando */
             printf("Filósofo %d esta pensando...\n", i);
         }
-        if (estado[i] == COM_FOME) {
+        if (estado[i] == COM_FOME) { /** Mostra se o filósofo está com fome */
             printf("Filósofo %d esta com fome...\n", i);
         }
-        if (estado[i] == COMENDO) {
+        if (estado[i] == COMENDO) { /** Mostra se o filósofo está comendo */
             printf("Filósofo %d esta comendo!\n", i);
         }
     }
@@ -72,21 +72,21 @@ _Noreturn void *gerenciaAcoesFilosofos(void *j) {
 }
 
 void pegaGarfos(int i) {
-    sem_wait(&mutex); //Pega o semáforo
-    estado[i] = COM_FOME; //Seta que está com fome
-    devolveEstadoFilosofos(); //Mostra o estado dos filósofos
-    verificaAcoesFilosofos(i); //Tenta pegar os garfos
-    sem_post(&mutex); //Libera o semáforo
-    sem_wait(&semaforo[i]); //Atualiza o seu próprio semáforo
+    sem_wait(&mutex); /**Pega o semáforo */
+    estado[i] = COM_FOME; /**Seta que está com fome */
+    devolveEstadoFilosofos(); /**Mostra o estado dos filósofos */
+    verificaAcoesFilosofos(i); /**Tenta pegar os garfos */
+    sem_post(&mutex); /**Libera o semáforo */
+    sem_wait(&semaforo[i]); /**Atualiza o seu próprio semáforo */
 }
 
 void soltaGarfos(int i) {
     int esquerda, direita;
-    sem_wait(&mutex);
-    estado[i] = PENSANDO;
-    devolveEstadoFilosofos();
-    esquerda = calculaPosicaoFilosofoEsquerda(i, numeroFilosofos);
-    direita = calculaPosicaoFilosofoDireita(i, numeroFilosofos);
+    sem_wait(&mutex); /**Pega o semáforo */
+    estado[i] = PENSANDO; /**Seta que está pensando */
+    devolveEstadoFilosofos(); /**Mostra o estado dos filósofos */
+    esquerda = calculaPosicaoFilosofoEsquerda(i, numeroFilosofos); /**Verifica se o filósofo a esquerda está comendo */
+    direita = calculaPosicaoFilosofoDireita(i, numeroFilosofos); /**Verifica se o filósofo a direita está comendo */
     verificaAcoesFilosofos(esquerda);
     verificaAcoesFilosofos(direita);
     sem_post(&mutex);
@@ -95,8 +95,8 @@ void soltaGarfos(int i) {
 // verifica quando o filósofo pode comer
 void verificaAcoesFilosofos(int i) {
     int esquerda, direita;
-    esquerda = calculaPosicaoFilosofoEsquerda(i, numeroFilosofos);
-    direita = calculaPosicaoFilosofoDireita(i, numeroFilosofos);
+    esquerda = calculaPosicaoFilosofoEsquerda(i, numeroFilosofos); /**Verifica se o filósofo a esquerda está comendo */
+    direita = calculaPosicaoFilosofoDireita(i, numeroFilosofos); /**Verifica se o filósofo a direita está comendo */
     if (estado[i] == COM_FOME && estado[esquerda] != COMENDO && estado[direita] != COMENDO) {
         estado[i] = COMENDO;
         devolveEstadoFilosofos();
