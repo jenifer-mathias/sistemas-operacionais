@@ -38,3 +38,14 @@ void *transfereParaOutraConta(pthread_t pro) {
     }
     pthread_exit(0);
 }
+
+void *recebeDaConta(void *ptr) {
+    for (int i = 0; i <= valor; i++) {
+        transferencia();
+        pthread_mutex_lock(&the_mutex);
+        while (buffer == 0) pthread_cond_wait(&condc, &the_mutex);
+        pthread_cond_signal(&condp);
+        pthread_mutex_unlock(&the_mutex);
+    }
+    pthread_exit(0);
+}
