@@ -19,6 +19,10 @@ int transferencia() {
         contaDe.saldo -= valor;
         contaPara.saldo += valor;
 
+        if(contaPara.saldo == 0) {
+            break;
+        }
+
         printf("\nTransferência concluída com sucesso!\n");
         printf("\nSaldo da conta de envio (C1): %d\n", contaDe.saldo);
         printf("\nSaldo da conta de destino (C2): %d\n", contaPara.saldo);
