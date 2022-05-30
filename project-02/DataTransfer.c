@@ -5,6 +5,7 @@
 pthread_mutex_t the_mutex;
 pthread_cond_t condc, condp;
 int buffer = 0;
+#define MAX 100
 
 struct Conta {
     int saldo;
@@ -15,24 +16,35 @@ conta contaDe, contaPara;
 int valor;
 
 int transferencia() {
-    while (contaDe.saldo != 0) {
+    while (contaDe.saldo != 0) { /** caso a conta for igual a 0, a transferência é paradda */
         contaDe.saldo -= valor;
-        contaPara.saldo += valor;
 
-        if(contaPara.saldo == 0) {
-            break;
-        }
+        // contaDe.saldo -= valor; /** caso queira fazer mais de uma transação simultânea */
+
+        contaPara.saldo += valor;
+        // contaPara.saldo += valor; /** caso queira fazer mais de uma transação simultânea */
 
         printf("\nTransferência concluída com sucesso!\n");
         printf("\nSaldo da conta de envio (C1): %d\n", contaDe.saldo);
         printf("\nSaldo da conta de destino (C2): %d\n", contaPara.saldo);
     }
+
+    /** implementação da lógica  ao trocar as contas de ordem **/
+//    while (contaPara.saldo != 0) { /** caso a conta for igual a 0, a transferência é paradda */
+//        contaPara.saldo -= valor;
+//        contaDe.saldo += valor;
+//
+//        printf("\nTransferência concluída com sucesso!\n");
+//        printf("\nSaldo da conta de envio (C1): %d\n", contaDe.saldo);
+//        printf("\nSaldo da conta de destino (C2): %d\n", contaPara.saldo);
+//    }
+
     exit(0);
 }
 
 void *transfereParaOutraConta() {
     valor = 10;
-    for (int i = 0; i <= valor; i++) {
+    for (int i = 0; i <= MAX; i++) {
         transferencia();
         pthread_mutex_lock(&the_mutex);
         while (buffer != 0) pthread_cond_wait(&condp, &the_mutex);
@@ -45,7 +57,7 @@ void *transfereParaOutraConta() {
 
 void *recebeDaConta() {
     valor = 10;
-    for (int i = 0; i <= valor; i++) {
+    for (int i = 0; i <= MAX; i++) {
         transferencia();
         pthread_mutex_lock(&the_mutex);
         while (buffer == 0) pthread_cond_wait(&condc, &the_mutex);
