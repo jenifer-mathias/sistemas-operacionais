@@ -26,24 +26,26 @@ int transferencia() {
     exit(0);
 }
 
-void *transfereParaOutraConta(pthread_t pro) {
+void *transfereParaOutraConta() {
+    valor = 10;
+    for (int i = 0; i <= valor; i++) {
+        transferencia();
+        pthread_mutex_lock(&the_mutex);
+        while (buffer != 0) pthread_cond_wait(&condp, &the_mutex);
+        buffer = i;
+        pthread_cond_signal(&condc);
+        pthread_mutex_unlock(&the_mutex);
+    }
+    pthread_exit(0);
+}
+
+void *recebeDaConta() {
     valor = 10;
     for (int i = 0; i <= valor; i++) {
         transferencia();
         pthread_mutex_lock(&the_mutex);
         while (buffer == 0) pthread_cond_wait(&condc, &the_mutex);
         buffer = 0;
-        pthread_cond_signal(&condp);
-        pthread_mutex_unlock(&the_mutex);
-    }
-    pthread_exit(0);
-}
-
-void *recebeDaConta(void *ptr) {
-    for (int i = 0; i <= valor; i++) {
-        transferencia();
-        pthread_mutex_lock(&the_mutex);
-        while (buffer == 0) pthread_cond_wait(&condc, &the_mutex);
         pthread_cond_signal(&condp);
         pthread_mutex_unlock(&the_mutex);
     }
@@ -57,8 +59,8 @@ void gerenciaThreads() {
     pthread_cond_init(&condc, 0);
     pthread_cond_init(&condp, 0);
 
-    pthread_create(&con, 0, transfereParaOutraConta(pro), 0);
-    pthread_create(&con, 0, recebeDaConta(con), 0);
+    pthread_create(&con, 0, transfereParaOutraConta(), 0);
+    pthread_create(&con, 0, recebeDaConta(), 0);
 
     pthread_join(pro, 0);
     pthread_join(con, 0);
