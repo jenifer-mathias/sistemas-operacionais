@@ -43,7 +43,7 @@ int transferencia() {
         printf("\nSaldo da conta de destino (C2): %d\n", contaDestino.saldo);
     }
 
-    /** implementação da lógica  ao trocar as contas de ordem **/
+    /** implementação da lógica  ao trocar as contas de ordem */
 //    while (contaDestino.saldo != 0) {
 //        contaDestino.saldo -= valor;
 //        contaEnvio.saldo += valor;
@@ -56,52 +56,52 @@ int transferencia() {
     exit(0);
 }
 
-void *transfereParaOutraConta() {           /** transfere saldo para a outra conta **/
-    valor = 10;                             /** valor que será transferido **/
+void *transfereParaOutraConta() {           /** transfere saldo para a outra conta */
+    valor = 10;                             /** valor que será transferido */
     for (int i = 0; i <= MAX; i++) {
-        transferencia();                    /** realiza transferência **/
-        pthread_mutex_lock(&mutex);         /** obtém acesso ao mutex no momento atual **/
+        transferencia();                    /** realiza transferência */
+        pthread_mutex_lock(&mutex);         /** obtém acesso ao mutex no momento atual */
         while (buffer != 0)
             pthread_cond_wait(&condContaEnvio, &mutex);
-        buffer = i;                              /** adiciona item no buffer **/
-        pthread_cond_signal(&condContaDestino);  /** acorda recebeDaConta **/
-        pthread_mutex_unlock(&mutex);            /** libera o mutex **/
+        buffer = i;                              /** adiciona item no buffer */
+        pthread_cond_signal(&condContaDestino);  /** acorda recebeDaConta */
+        pthread_mutex_unlock(&mutex);            /** libera o mutex */
     }
     pthread_exit(0);
 }
 
-void *recebeDaConta() {                     /** recebe a transferência **/
-    valor = 10;                             /** valor da transferência **/
+void *recebeDaConta() {                     /** recebe a transferência */
+    valor = 10;                             /** valor da transferência */
     for (int i = 0; i <= MAX; i++) {
-        transferencia();                    /** realiza transferência **/
-        pthread_mutex_lock(&mutex);         /** obtém acesso ao mutex no momento atual **/
+        transferencia();                    /** realiza transferência */
+        pthread_mutex_lock(&mutex);         /** obtém acesso ao mutex no momento atual */
         while (buffer == 0)
             pthread_cond_wait(&condContaDestino, &mutex);
-        buffer = 0;                            /** retira itens do buffer **/
-        pthread_cond_signal(&condContaEnvio);  /** acorda transfereParaOutraConta **/
-        pthread_mutex_unlock(&mutex);          /** libera o mutex **/
+        buffer = 0;                            /** retira itens do buffer */
+        pthread_cond_signal(&condContaEnvio);  /** acorda transfereParaOutraConta */
+        pthread_mutex_unlock(&mutex);          /** libera o mutex */
     }
     pthread_exit(0);
 }
 
 void gerenciaThreads() {
-    pthread_t pthread_conta_envio, pthread_conta_destino;        /** cria duas threads (uma para cada conta) **/
+    pthread_t pthread_conta_envio, pthread_conta_destino;        /** cria duas threads (uma para cada conta) */
 
-    pthread_mutex_init(&mutex, 0);                               /** cria mutex **/
+    pthread_mutex_init(&mutex, 0);                               /** cria mutex */
 
     pthread_cond_init((pthread_cond_t *) &condContaDestino, 0);
-    pthread_cond_init((pthread_cond_t *) &condContaEnvio, 0);             /** cria variáveis de condição **/
+    pthread_cond_init((pthread_cond_t *) &condContaEnvio, 0);             /** cria variáveis de condição */
 
-    pthread_create(&pthread_conta_envio, 0, transfereParaOutraConta(), 0);    /** cria thread "produtora" **/
-    pthread_create(&pthread_conta_destino, 0, recebeDaConta(), 0);            /** cria thread "consumidora" **/
+    pthread_create(&pthread_conta_envio, 0, transfereParaOutraConta(), 0);    /** cria thread "produtora" */
+    pthread_create(&pthread_conta_destino, 0, recebeDaConta(), 0);            /** cria thread "consumidora" */
 
-    pthread_join(pthread_conta_envio, 0);                    /** aguarda término da thread pthread_conta_envio **/
-    pthread_join(pthread_conta_destino, 0);                  /** aguarda término da thread pthread_conta_destino **/
+    pthread_join(pthread_conta_envio, 0);                    /** aguarda término da thread pthread_conta_envio */
+    pthread_join(pthread_conta_destino, 0);                  /** aguarda término da thread pthread_conta_destino */
 
     pthread_cond_destroy((pthread_cond_t *) &pthread_conta_destino);
-    pthread_cond_destroy((pthread_cond_t *) &pthread_conta_envio);    /** destrói variáveis de condição **/
+    pthread_cond_destroy((pthread_cond_t *) &pthread_conta_envio);    /** destrói variáveis de condição */
 
-    pthread_mutex_destroy(&mutex);         /** destrói mutex **/
+    pthread_mutex_destroy(&mutex);         /** destrói mutex */
 }
 
 int main() {
