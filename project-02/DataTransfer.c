@@ -80,20 +80,20 @@ void *recebeDaConta() {                     /** recebe a transferência **/
 }
 
 void gerenciaThreads() {
-    pthread_t pro, con;                     /** cria duas threads (uma para cada conta) **/
-    pthread_mutex_init(&mutex, 0);          /** cria mutex **/
+    pthread_t pthread_conta_envio, pthread_conta_destino;        /** cria duas threads (uma para cada conta) **/
+    pthread_mutex_init(&mutex, 0);                               /** cria mutex **/
 
-    pthread_cond_init(&condContaDestino, 0);
-    pthread_cond_init(&condContaEnvio, 0);           /** cria variáveis de condição **/
+    pthread_cond_init((pthread_cond_t *) &condContaDestino, 0);
+    pthread_cond_init((pthread_cond_t *) &condContaEnvio, 0);             /** cria variáveis de condição **/
 
-    pthread_create(&con, 0, transfereParaOutraConta(), 0);
-    pthread_create(&con, 0, recebeDaConta(), 0);
+    pthread_create(&pthread_conta_envio, 0, transfereParaOutraConta(), 0);    /** cria thread "produtora" **/
+    pthread_create(&pthread_conta_destino, 0, recebeDaConta(), 0);            /** cria thread "consumidora" **/
 
-    pthread_join(pro, 0);                    /** aguarda término da thread pro **/
-    pthread_join(con, 0);                    /** aguarda término da thread con **/
+    pthread_join(pthread_conta_envio, 0);                    /** aguarda término da thread pthread_conta_envio **/
+    pthread_join(pthread_conta_destino, 0);                  /** aguarda término da thread pthread_conta_destino **/
 
-    pthread_cond_destroy(&condContaDestino);
-    pthread_cond_destroy(&condContaEnvio);    /** destrói variáveis de condição **/
+    pthread_cond_destroy((pthread_cond_t *) &pthread_conta_destino);
+    pthread_cond_destroy((pthread_cond_t *) &pthread_conta_envio);    /** destrói variáveis de condição **/
 
     pthread_mutex_destroy(&mutex);         /** destrói mutex **/
 }
