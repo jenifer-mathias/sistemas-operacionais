@@ -52,6 +52,7 @@ int transferencia() {
 //        printf("\nSaldo da conta de envio (C1): %d\n", contaEnvio.saldo);
 //        printf("\nSaldo da conta de destino (C2): %d\n", contaDestino.saldo);
 //    }
+
     exit(0);
 }
 
@@ -85,6 +86,7 @@ void *recebeDaConta() {                     /** recebe a transferência **/
 
 void gerenciaThreads() {
     pthread_t pthread_conta_envio, pthread_conta_destino;        /** cria duas threads (uma para cada conta) **/
+
     pthread_mutex_init(&mutex, 0);                               /** cria mutex **/
 
     pthread_cond_init((pthread_cond_t *) &condContaDestino, 0);
