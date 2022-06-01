@@ -3,25 +3,21 @@
 #include <stdlib.h>
 
 pthread_mutex_t the_mutex; 
-// variável utilizada para guardar a região crítica. Ao tentar acessar a região crítica, as threads destravam o mutex e ao estar
-// fora da região crítica, o mutex fica travado
+/** variável utilizada para guardar a região crítica. Ao tentar acessar a região crítica, as threads destravam o mutex e ao estar
+fora da região crítica, o mutex fica travado */
 pthread_cond_t condc, condp; 
-// variáveis de condição usadas para sinalização e para permitir que as threads sejam bloqueadas caso a condição estabelecida não seja atendida
+/** variáveis de condição usadas para sinalização e para permitir que as threads sejam bloqueadas caso a condição estabelecida não seja atendida */ 
 int buffer = 0; 
-// buffer (região de memória) usado para receber ou liberar posições, mediante ao que é solicitado pelas threads
-#define MAX 100
-// limite de transferências simultâneas
+/** buffer (região de memória) usado para receber ou liberar informações, mediante ao que é solicitado pelas threads */
+#define MAX 100 /* limite de transferências simultâneas */
 
 struct Conta {
-  int saldo;
-// cria struct com variável saldo
+  int saldo; /** cria struct com variável saldo */
 };
 
 typedef struct Conta conta;
-conta contaDe, contaPara;
-// cria as duas contas
-int valor;                
-// cria variável valor
+conta contaDe, contaPara; /** cria as duas contas */
+int valor;                /** cria variável valor */
 
 int transferencia() {
 
@@ -32,14 +28,12 @@ int transferencia() {
 
   while (contaDe.saldo !=
          0) { /** caso a conta for igual a 0, a transferÃªncia Ã© paradda */
-    contaDe.saldo -= valor;
-      // subtrai valor da conta que está transferindo
+    contaDe.saldo -= valor;  /** subtrai valor da conta que está transferindo */
 
     // contaDe.saldo -= valor; /** caso queira fazer mais de uma transaÃ§Ã£o
     // simultÃ¢nea */
 
-    contaPara.saldo += valor;
-      // adiciona valor na conta que recebe a transferência
+    contaPara.saldo += valor; /** adiciona valor na conta que recebe a transferência **/
       
     // contaPara.saldo += valor; /** caso queira fazer mais de uma transaÃ§Ã£o
     // simultÃ¢nea */
@@ -62,70 +56,51 @@ int transferencia() {
   exit(0);
 }
 
-void *transfereParaOutraConta() {     // transfere saldo para a outra conta
-  valor = 10;                     
-  // valor que será transferido
+void *transfereParaOutraConta() {     /** transfere saldo para a outra conta **/
+  valor = 10;                         /** valor que será transferido **/
   for (int i = 0; i <= MAX; i++) {
-    transferencia();               
-    // realiza transferência
-    pthread_mutex_lock(&the_mutex);
-      // obtem acesso ao mutex no momento atual
+    transferencia();                  /** realiza transferência **/
+    pthread_mutex_lock(&the_mutex);   /** obtem acesso ao mutex no momento atual **/
     while (buffer != 0)
       pthread_cond_wait(&condp, &the_mutex);
-    buffer = i;                      
-      // adiciona item no buffer
-    pthread_cond_signal(&condc);     
-      // acorda recebeDaConta
-    pthread_mutex_unlock(&the_mutex);
-      // libera o mutex
+    buffer = i;                       /** adiciona item no buffer **/
+    pthread_cond_signal(&condc);       /** acorda recebeDaConta **/
+    pthread_mutex_unlock(&the_mutex);  /** libera o mutex **/
   }
   pthread_exit(0);
 }
 
-void *recebeDaConta() {          // recebe a transferência
-  valor = 10;         
-    // valor da transferência
+void *recebeDaConta() {                /** recebe a transferência **/
+  valor = 10;                         /** valor da transferência **/
   for (int i = 0; i <= MAX; i++) {
-    transferencia();              
-      // realiza transferência
-    pthread_mutex_lock(&the_mutex);
-      // obtem acesso ao mutex no momento atual
+    transferencia();                  /** realiza transferência **/
+    pthread_mutex_lock(&the_mutex);   /** obtem acesso ao mutex no momento atual **/
     while (buffer == 0)
       pthread_cond_wait(&condc, &the_mutex);
-    buffer = 0;                      
-      // retira itens do buffer
-    pthread_cond_signal(&condp);     
-      // acorda transfereParaOutraConta
-    pthread_mutex_unlock(&the_mutex);
-      // libera o mutex
+    buffer = 0;                          /** retira itens do buffer **/
+    pthread_cond_signal(&condp);        /** acorda transfereParaOutraConta **/
+    pthread_mutex_unlock(&the_mutex);   /** libera o mutex **/
   }
   pthread_exit(0);
 }
 
 void gerenciaThreads() {
-  pthread_t pro, con; 
-    /** cria duas threads (uma para cada conta) **/
-  pthread_mutex_init(&the_mutex, 0); 
-   // cria mutex
+  pthread_t pro, con;     /** cria duas threads (uma para cada conta) **/
+  pthread_mutex_init(&the_mutex, 0);  /** cria mutex **/
 
   pthread_cond_init(&condc, 0); 
-  pthread_cond_init(&condp, 0);
-   // cria variáveis de condição
+  pthread_cond_init(&condp, 0);    /** cria variáveis de condição **/
 
   pthread_create(&con, 0, transfereParaOutraConta(), 0);
   pthread_create(&con, 0, recebeDaConta(), 0);
 
-  pthread_join(pro, 0);
-    // aguarda término da thread pro
-  pthread_join(con, 0);
-    // aguarda término da thread con
+  pthread_join(pro, 0);  /** aguarda término da thread pro **/
+  pthread_join(con, 0);   /** aguarda término da thread con **/
 
   pthread_cond_destroy(&condc);
-  pthread_cond_destroy(&condp);
-    // destroi variáveis de condição
+  pthread_cond_destroy(&condp);  /** destroi variáveis de condição **/
 
-  pthread_mutex_destroy(&the_mutex);
-    // destroi mutex
+  pthread_mutex_destroy(&the_mutex);  /** destroi mutex **/
 }
 
 int main() {
