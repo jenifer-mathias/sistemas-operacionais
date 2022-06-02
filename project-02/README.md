@@ -139,7 +139,7 @@ while (contaEnvio.saldo != 0) {
 
 ![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/main/project-02/assets/condiction-2B.png)
 
-Para obter os resultados esperados, é necessário sincronizar as contas de envio e recebimento:
+### Para obter os resultados esperados, é necessário sincronizar as contas de envio e recebimento:
 
 ![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/main/project-02/assets/condiction-1-and-2.png)
 
