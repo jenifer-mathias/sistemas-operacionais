@@ -27,32 +27,32 @@ int valor;                       /** cria variável valor */
 int transferencia() {
 
     /** caso a conta for igual a 0, a transferência é parada */
-//    while (contaEnvio.saldo != 0) {
-//
-//        contaEnvio.saldo -= valor;
-//
-//        /** caso queira fazer mais de uma transação simultânea */
-//        // contaEnvio.saldo -= valor;
-//
-//        contaDestino.saldo += valor;
-//
-//        /** caso queira fazer mais de uma transação simultânea */
-//        // contaDestino.saldo += valor;
-//
-//        printf("\nTransferência concluída com sucesso!\n");
-//        printf("\nSaldo da conta de envio (C1): %d\n", contaEnvio.saldo);
-//        printf("\nSaldo da conta de destino (C2): %d\n", contaDestino.saldo);
-//    }
+    while (contaEnvio.saldo != 0) {
 
-    /** implementação da lógica  ao trocar as contas de ordem */
-    while (contaDestino.saldo != 0) {
-        contaDestino.saldo -= valor;
-        contaEnvio.saldo += valor;
+        contaEnvio.saldo -= valor;
+
+        /** caso queira fazer mais de uma transação simultânea */
+        // contaEnvio.saldo -= valor;
+
+        contaDestino.saldo += valor;
+
+        /** caso queira fazer mais de uma transação simultânea */
+        // contaDestino.saldo += valor;
 
         printf("\nTransferência concluída com sucesso!\n");
         printf("\nSaldo da conta de envio (C1): %d\n", contaEnvio.saldo);
         printf("\nSaldo da conta de destino (C2): %d\n", contaDestino.saldo);
     }
+
+    /** implementação da lógica  ao trocar as contas de ordem */
+//    while (contaDestino.saldo != 0) {
+//        contaDestino.saldo -= valor;
+//        contaEnvio.saldo += valor;
+//
+//        printf("\nTransferência concluída com sucesso!\n");
+//        printf("\nSaldo da conta de envio (C1): %d\n", contaEnvio.saldo);
+//        printf("\nSaldo da conta de destino (C2): %d\n", contaDestino.saldo);
+//    }
 
     exit(0);
 }
