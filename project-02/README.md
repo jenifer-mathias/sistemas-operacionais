@@ -220,8 +220,6 @@ void recebeDaConta() {                     /* recebe a transferência */
 - Após acessar o código fonte você pode copiar o código, colar no site [OnlineGDB](https://www.onlinegdb.com/), escolher a linguagem de programação C e compilar o código através do botão 'Run'.
 - É possível compilar o código em IDEs compatíveis com a linguagem C, como [CLion](https://www.jetbrains.com/pt-br/clion/) e [Code::Blocks](https://www.codeblocks.org).
 
----
-
 # Referência
 
 TANENBAUM, Andrew S.; BOS, Herbert. **Sistemas Operacionais Modernos**. Pearson, 4° edição, 7 de dezembro de 2015. p. 88, 92-95.
