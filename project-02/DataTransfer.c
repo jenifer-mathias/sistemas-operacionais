@@ -26,6 +26,7 @@ int valor;                       /** cria variável valor */
 
 int transferencia() {
 
+    /** caso a conta for igual a 0, a transferência é parada */
     while (contaEnvio.saldo != 0) {
 
         contaEnvio.saldo -= valor;
