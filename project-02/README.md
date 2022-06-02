@@ -1,7 +1,5 @@
 # Laboratório 04
 
----
-
 ## Implementação
 
 O exemplo a seguir, implementado na linguagem C, apresenta uma operação de transferência de fundos entre duas contas:
