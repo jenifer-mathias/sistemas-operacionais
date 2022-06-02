@@ -139,7 +139,26 @@ while (contaEnvio.saldo != 0) {
 
 ![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/main/project-02/assets/condiction-2B.png)
 
-### Para obter os resultados esperados, é necessário sincronizar as contas de envio e recebimento:
+### Para obter os resultados esperados, é necessário sincronizar os valores das contas de envio e recebimento:
+
+```
+while (contaEnvio.saldo != 0) {
+
+        contaEnvio.saldo -= valor;
+
+        /** caso queira fazer mais de uma transação simultânea */
+        contaEnvio.saldo -= valor;
+
+        contaDestino.saldo += valor;
+
+        /** caso queira fazer mais de uma transação simultânea */
+        contaDestino.saldo += valor;
+
+        printf("\nTransferência concluída com sucesso!\n");
+        printf("\nSaldo da conta de envio (C1): %d\n", contaEnvio.saldo);
+        printf("\nSaldo da conta de destino (C2): %d\n", contaDestino.saldo);
+    }
+  ```
 
 ![image](https://github.com/jenifer-mathias/sistemas-operacionais/blob/main/project-02/assets/condiction-1-and-2.png)
 
